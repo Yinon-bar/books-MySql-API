@@ -9,12 +9,6 @@ const connection = mysql.createPool({
   database: appConfig.db,
 });
 
-if (!connection) {
-  console.log("Connection faild");
-} else {
-  console.log(chalk.magentaBright("Connect to MySql"));
-}
-
 function execute(SQL: string): Promise<any> {
   return new Promise((resolve, reject) => {
     connection.query(SQL, (error, result) => {

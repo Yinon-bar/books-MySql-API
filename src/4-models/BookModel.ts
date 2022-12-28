@@ -11,3 +11,5 @@ class BookModel {
     this.price = book.price;
   }
 }
+
+export default BookModel;
