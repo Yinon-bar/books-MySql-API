@@ -3,8 +3,8 @@ import bookLogic from "../5-logic/bookLogic";
 
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response, next: NextFunction) => {
-  const books = bookLogic.getAllBooks();
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  const books = await bookLogic.getAllBooks();
   res.json(books);
 });
 

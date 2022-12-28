@@ -10,5 +10,9 @@ app.use(express.json());
 app.use("/api/books", router);
 
 app.listen(appConfig.port, () => {
-  chalk.bgGreen(console.log(`Listening to http://localhost:${appConfig.port}`));
+  console.log(
+    chalk.redBright.bgGreen.bold(
+      `Listening to http://localhost:${appConfig.port}`
+    )
+  );
 });
