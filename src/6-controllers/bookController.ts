@@ -16,4 +16,11 @@ router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
   res.json(book);
 });
 
+// POST one book
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+  const newBook = await bookLogic.postOneBook(req.body);
+  res.json(newBook);
+});
+
 export default router;

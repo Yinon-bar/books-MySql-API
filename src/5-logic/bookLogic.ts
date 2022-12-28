@@ -29,8 +29,8 @@ async function postOneBook(book: BookModel): Promise<BookModel> {
   INSERT INTO books (id, bookName, bookAuthor, bookPrice)
   VALUES ('${book.id}', '${book.name}', '${book.author}', '${book.price}')
   `;
-  const books = await dal.execute(SQL);
-  return book;
+  const newBook = await dal.execute(SQL);
+  return newBook;
 }
 
 export default {
