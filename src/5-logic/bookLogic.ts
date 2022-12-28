@@ -27,20 +27,49 @@ async function getOneBook(id: number): Promise<BookModel[]> {
 // POST one book
 async function postOneBook(book: BookModel): Promise<BookModel> {
   // TODO - Validation
-
   const SQL = `
-  INSERT INTO books (id, bookName, bookAuthor, bookPrice)
-  VALUES ('${book.id}', '${book.name}', '${book.author}', '${book.price}')
+  INSERT INTO books (bookName, bookAuthor, bookPrice)
+  VALUES ('${book.name}', '${book.author}', '${book.price}')
   `;
 
   const info: OkPacket = await dal.execute(SQL);
   book.id = info.insertId;
-
   return book;
+}
+
+// UPDATE one book
+async function updateOneBook(book: BookModel): Promise<BookModel> {
+  // TODO - Validation
+
+  const SQL = `
+  UPDATE books
+  SET bookName = '${book.name}', bookAuthor = '${book.author}', bookPrice = '${book.price}'
+  WHERE id = ${book.id};
+  `;
+
+  const info: OkPacket = await dal.execute(SQL);
+  // book.id = info.insertId;
+  return book;
+}
+
+// DELETE one book
+async function deleteOneBook(id: number) {
+  // TODO - Validation
+
+  const SQL = `
+  DELETE FROM books
+  WHERE id = ${id};
+  `;
+
+  const info: OkPacket = await dal.execute(SQL);
+  // book.id = info.insertId;
+  return info;
 }
 
 export default {
   getAllBooks,
   getOneBook,
   postOneBook,
+  updateOneBook,
+  deleteOneBook,
 };

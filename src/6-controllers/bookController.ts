@@ -20,7 +20,24 @@ router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   const newBook = await bookLogic.postOneBook(req.body);
-  res.json(newBook);
+  res.status(201).json(newBook);
 });
+
+// UPDATE one book
+router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const newBook = req.body;
+  newBook.id = +req.params.id;
+  const updatedBook = await bookLogic.updateOneBook(newBook);
+  res.status(200).json(updatedBook);
+});
+
+// DELETE one book
+router.delete(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    await bookLogic.deleteOneBook(+req.params.id);
+    res.sendStatus(204);
+  }
+);
 
 export default router;
