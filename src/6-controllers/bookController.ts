@@ -1,12 +1,17 @@
 import express, { NextFunction, Request, Response } from "express";
+import deleteMessage from "../3-middleware/deleteMessage";
 import bookLogic from "../5-logic/bookLogic";
 
 const router = express.Router();
 
 // GET all books
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-  const books = await bookLogic.getAllBooks();
-  res.json(books);
+  try {
+    const books = await bookLogic.getAllBooks();
+    res.json(books);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // GET one book
@@ -34,6 +39,7 @@ router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
 // DELETE one book
 router.delete(
   "/:id",
+  deleteMessage,
   async (req: Request, res: Response, next: NextFunction) => {
     await bookLogic.deleteOneBook(+req.params.id);
     res.sendStatus(204);
