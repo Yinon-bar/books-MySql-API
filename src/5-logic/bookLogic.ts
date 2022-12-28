@@ -1,3 +1,4 @@
+import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import BookModel from "../4-models/BookModel";
 
@@ -25,12 +26,17 @@ async function getOneBook(id: number): Promise<BookModel[]> {
 
 // POST one book
 async function postOneBook(book: BookModel): Promise<BookModel> {
+  // TODO - Validation
+
   const SQL = `
   INSERT INTO books (id, bookName, bookAuthor, bookPrice)
   VALUES ('${book.id}', '${book.name}', '${book.author}', '${book.price}')
   `;
-  const newBook = await dal.execute(SQL);
-  return newBook;
+
+  const info: OkPacket = await dal.execute(SQL);
+  book.id = info.insertId;
+
+  return book;
 }
 
 export default {
