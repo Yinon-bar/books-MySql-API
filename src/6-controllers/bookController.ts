@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import deleteMessage from "../3-middleware/deleteMessage";
+import BookModel from "../4-models/BookModel";
 import bookLogic from "../5-logic/bookLogic";
 
 const router = express.Router();
@@ -29,8 +30,8 @@ router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
 // POST one book
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const body = req.body;
-    const newBook = await bookLogic.postOneBook(req.body);
+    const book = new BookModel(req.body);
+    const newBook = await bookLogic.postOneBook(book);
     res.status(201).json(newBook);
   } catch (error) {
     next(error);
@@ -38,16 +39,19 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 });
 
 // UPDATE one book
-router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const newBook = req.body;
-    newBook.id = +req.params.id;
-    const updatedBook = await bookLogic.updateOneBook(newBook);
-    res.status(200).json(updatedBook);
-  } catch (error) {
-    next(error);
+router.put(
+  "/:id([0-9]+)",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const newBook = req.body;
+      newBook.id = +req.params.id;
+      const updatedBook = await bookLogic.updateOneBook(newBook);
+      res.status(200).json(updatedBook);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // DELETE one book
 router.delete(

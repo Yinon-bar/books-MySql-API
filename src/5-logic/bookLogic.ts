@@ -1,6 +1,10 @@
 import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import BookModel from "../4-models/BookModel";
+import {
+  ResourceNotFoundError,
+  ValidationModel,
+} from "../4-models/errorModels";
 
 // GET all books
 async function getAllBooks(): Promise<BookModel[]> {
@@ -21,12 +25,20 @@ async function getOneBook(id: number): Promise<BookModel[]> {
   `;
   const books = await dal.execute(SQL);
   const book = books[0];
+
+  if (!book) {
+    throw new ResourceNotFoundError(id);
+  }
   return book;
 }
 
 // POST one book
 async function postOneBook(book: BookModel): Promise<BookModel> {
-  // TODO - Validation
+  const error = book.validation();
+  if (error) {
+    throw new ValidationModel(error);
+  }
+
   const SQL = `
   INSERT INTO books (bookName, bookAuthor, bookPrice)
   VALUES ('${book.name}', '${book.author}', '${book.price}')
@@ -49,6 +61,9 @@ async function updateOneBook(book: BookModel): Promise<BookModel> {
 
   const info: OkPacket = await dal.execute(SQL);
   // book.id = info.insertId;
+  if (info.affectedRows === 0) {
+    throw new ResourceNotFoundError(book.id);
+  }
   return book;
 }
 
@@ -63,6 +78,10 @@ async function deleteOneBook(id: number) {
 
   const info: OkPacket = await dal.execute(SQL);
   // book.id = info.insertId;
+  if (info.affectedRows === 0) {
+    throw new ResourceNotFoundError(id);
+  }
+
   return info;
 }
 
