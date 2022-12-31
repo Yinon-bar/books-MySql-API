@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import deleteMessage from "../3-middleware/deleteMessage";
-import verifyLogin from "../3-middleware/verifyLogin";
+import BookModel from "../4-models/BookModel";
 import bookLogic from "../5-logic/bookLogic";
 
 const router = express.Router();

@@ -16,7 +16,10 @@
     "@types/node": "^18.11.18",
     "chalk": "^4.1.2",
     "express": "^4.18.2",
+<<<<<<< HEAD
     "jsonwebtoken": "^9.0.0",
+=======
+>>>>>>> parent of e8fb658 (joi validation)
     "mysql": "^2.18.1",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1"
