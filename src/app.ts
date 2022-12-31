@@ -6,6 +6,7 @@ import catchAll from "./3-middleware/catchAll";
 import logRequest from "./3-middleware/logRequest";
 import RouteNotFound from "./3-middleware/routeNotFound";
 import router from "./6-controllers/bookController";
+import authRouter from "./6-controllers/authController";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(logRequest);
 // app.use(blockWednesday);
 
 app.use("/api/books", router);
+app.use("/api/books", authRouter);
 
 app.use("*", RouteNotFound);
 

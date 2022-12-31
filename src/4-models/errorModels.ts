@@ -6,3 +6,8 @@ export class RouteNotFoundError extends ErrorModel {
     super(`Route ${route} Not Found!`, 404);
   }
 }
+export class AuthErrorModel extends ErrorModel {
+  public constructor(msg: string) {
+    super(msg, 401);
+  }
+}
