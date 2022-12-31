@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Lord Of The Rings - Trilogy",
+    "author": "J.R.R Tolkin",
+    "price": 256
+  },
+  {
+    "id": 2,
+    "name": "The Hobbit",
+    "author": "J.R.R Tolkin",
+    "price": 99
+  },
+  {
+    "id": 3,
+    "name": "A brief history of time",
+    "author": "Stefen Hawking",
+    "price": 100
+  },
+  {
+    "id": 4,
+    "name": "משאלה אחת ימינה",
+    "author": "אשכול נבו אמיר",
+    "price": 36
+  },
+  {
+    "id": 5,
+    "name": "Harry Potter 2 - and the chamber of secrets",
+    "author": "J.K Rowling",
+    "price": 136
+  },
+  {
+    "id": 6,
+    "name": "The Hitchhikers guide to the galaxy",
+    "author": "Douglas Adams",
+    "price": 98
+  },
+  {
+    "id": 7,
+    "name": "A brief history of time",
+    "author": "Stefen Hawking",
+    "price": 50
+  },
+  {
+    "id": 8,
+    "name": "The Legend",
+    "author": "Harlen koban",
+    "price": 46
+  }
+]
